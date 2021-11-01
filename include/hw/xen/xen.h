@@ -37,6 +37,15 @@ extern uint32_t xen_domid;
 extern enum xen_mode xen_mode;
 extern bool xen_domid_restrict;
 
+static inline int xen_stubdom_enable(void)
+{
+#ifdef CONFIG_STUBDOM
+    return 1;
+#else
+    return 0;
+#endif
+}
+
 int xen_pci_slot_get_pirq(PCIDevice *pci_dev, int irq_num);
 int xen_set_pci_link_route(uint8_t link, uint8_t irq);
 void xen_intx_set_irq(void *opaque, int irq_num, int level);
