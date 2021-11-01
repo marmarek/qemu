@@ -148,6 +148,8 @@ if spice.found() and gio.found()
   ui_modules += {'spice-app': spice_ss}
 endif
 
+subdir('gui-agent')
+
 keymaps = [
   ['atset1', 'qcode'],
   ['linux', 'qcode'],

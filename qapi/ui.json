@@ -1442,6 +1442,21 @@
   'data'    : { '*grab-mod'   : 'HotKeyMod' } }
 
 ##
+# @DisplayQubesGUI:
+#
+# QubesGUI display options.
+#
+# @log-level: Log level
+# @domid: Domain ID of backend (gui-daemon)
+#
+# Since: 3.0
+#
+##
+{ 'struct'  : 'DisplayQubesGUI',
+  'data'    : { '*log-level': 'int',
+                'domid'     : 'int' } }
+
+##
 # @DisplayType:
 #
 # Display (user interface) type.
@@ -1488,7 +1503,8 @@
     { 'name': 'curses', 'if': 'CONFIG_CURSES' },
     { 'name': 'cocoa', 'if': 'CONFIG_COCOA' },
     { 'name': 'spice-app', 'if': 'CONFIG_SPICE' },
-    { 'name': 'dbus', 'if': 'CONFIG_DBUS_DISPLAY' }
+    { 'name': 'dbus', 'if': 'CONFIG_DBUS_DISPLAY' },
+    { 'name': 'qubes-gui'}
   ]
 }
 
@@ -1526,7 +1542,8 @@
       'egl-headless': { 'type': 'DisplayEGLHeadless',
                         'if': 'CONFIG_OPENGL' },
       'dbus': { 'type': 'DisplayDBus', 'if': 'CONFIG_DBUS_DISPLAY' },
-      'sdl': { 'type': 'DisplaySDL', 'if': 'CONFIG_SDL' }
+      'sdl': { 'type': 'DisplaySDL', 'if': 'CONFIG_SDL' },
+      'qubes-gui': { 'type': 'DisplayQubesGUI' }
   }
 }
 

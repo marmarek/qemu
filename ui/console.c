@@ -24,6 +24,7 @@
 
 #include "qemu/osdep.h"
 #include "ui/console.h"
+#include "qubes-gui-qemu.h"
 #include "hw/qdev-core.h"
 #include "qapi/error.h"
 #include "qapi/qapi-commands-ui.h"
@@ -1577,6 +1578,10 @@ DisplaySurface *qemu_create_displaysurface_from(int width, int height,
     DisplaySurface *surface = g_new0(DisplaySurface, 1);
 
     trace_displaysurface_create_from(surface, width, height, format);
+    if (!data)
+        data = qubesgui_alloc_surface_data(width, height, &surface->xen_refs);
+    assert(data != NULL);
+
     surface->format = format;
     surface->image = pixman_image_create_bits(surface->format,
                                               width, height,

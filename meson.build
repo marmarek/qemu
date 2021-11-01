@@ -1891,6 +1891,13 @@ if not get_option('libdw').auto() or \
                        required: get_option('libdw'))
 endif
 
+vchan_xen = dependency('vchan-xen', required: true, method: 'pkg-config')
+
+add_project_arguments(
+  '-iquote', meson.current_source_dir() / 'ui' / 'gui-agent' / 'include',
+  language: ['c', 'cpp', 'objc']
+)
+
 #################
 # config-host.h #
 #################
@@ -4288,6 +4295,7 @@ summary_info += {'fdt support':       fdt_opt == 'disabled' ? false : fdt_opt}
 summary_info += {'libcap-ng support': libcap_ng}
 summary_info += {'bpf support':       libbpf}
 summary_info += {'rbd support':       rbd}
+summary_info += {'libvchan support':  vchan_xen}
 summary_info += {'smartcard support': cacard}
 summary_info += {'U2F support':       u2f}
 summary_info += {'libusb':            libusb}
