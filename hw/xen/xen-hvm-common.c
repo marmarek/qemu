@@ -869,7 +869,15 @@ void xen_register_ioreq(XenIOState *state, unsigned int max_cpus,
 
     xen_bus_init();
 
+#ifndef CONFIG_STUBDOM
     xen_be_init();
+#else
+    xenstore = xs_daemon_open();
+    if (!xenstore) {
+        error_report("can't connect to xenstored");
+        goto err;
+    }
+#endif
 
     return;
 
