@@ -1321,6 +1321,19 @@ static int intel_hda_and_codec_init(PCIBus *bus, const char *audiodev)
     return 0;
 }
 
+static int intel_ich9_and_codec_init(PCIBus *bus)
+{
+    DeviceState *controller;
+    BusState *hdabus;
+    DeviceState *codec;
+
+    controller = DEVICE(pci_create_simple(bus, -1, "ich9-intel-hda"));
+    hdabus = QLIST_FIRST(&controller->child_bus);
+    codec = qdev_new("hda-duplex");
+    qdev_realize_and_unref(codec, hdabus, &error_fatal);
+    return 0;
+}
+
 static void intel_hda_register_types(void)
 {
     type_register_static(&hda_codec_bus_info);
@@ -1329,6 +1342,8 @@ static void intel_hda_register_types(void)
     type_register_static(&intel_hda_info_ich9);
     type_register_static(&hda_codec_device_type_info);
     pci_register_soundhw("hda", "Intel HD Audio", intel_hda_and_codec_init);
+    pci_register_soundhw("ich6", "ich6 Intel HD Audio", intel_hda_and_codec_init);
+    pci_register_soundhw("ich9", "ich9 Intel HD Audio", intel_ich9_and_codec_init);
 }
 
 type_init(intel_hda_register_types)

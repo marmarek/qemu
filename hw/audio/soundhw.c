@@ -40,7 +40,7 @@ struct soundhw {
     int (*init_pci) (PCIBus *bus, const char *audiodev);
 };
 
-static struct soundhw soundhw[9];
+static struct soundhw soundhw[11];
 static int soundhw_count;
 
 void pci_register_soundhw(const char *name, const char *descr,
