@@ -2333,7 +2333,7 @@ SRST
 ERST
 
 DEF("vga", HAS_ARG, QEMU_OPTION_vga,
-    "-vga [std|cirrus|vmware|qxl|xenfb|tcx|cg3|virtio|none]\n"
+    "-vga [std|cirrus|vmware|qxl|xenfb|tcx|cg3|virtio|xengt|none]\n"
     "                select video card type\n", QEMU_ARCH_ALL)
 SRST
 ``-vga type``
@@ -2376,6 +2376,11 @@ SRST
 
     ``virtio``
         Virtio VGA card.
+
+    ``xengt``
+        Intel IGD card based on mediated pass-through technique. A single
+        IGD card can be used to accelerate multiple VMs, which each run
+        native graphics driver inside.
 
     ``none``
         Disable VGA card.

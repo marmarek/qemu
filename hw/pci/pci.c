@@ -1163,6 +1163,10 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
     if (devfn < 0) {
         for(devfn = bus->devfn_min ; devfn < ARRAY_SIZE(bus->devices);
             devfn += PCI_FUNC_MAX) {
+            /* If vGT/XenGT is in use, reserve 00:02.* for the IGD */
+            if (vga_interface_type == VGA_VGT && devfn == 0x10)
+                continue;
+
             if (pci_bus_devfn_available(bus, devfn) &&
                    !pci_bus_devfn_reserved(bus, devfn)) {
                 goto found;

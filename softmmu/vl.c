@@ -941,6 +941,10 @@ static const VGAInterfaceInfo vga_interfaces[VGA_TYPE_MAX] = {
         .name = "Xen paravirtualized framebuffer",
     },
 #endif
+    [VGA_VGT] = {
+        .opt_name = "xengt",
+        .name = "Intel GVT-g",
+    },
 };
 
 static bool vga_interface_available(VGAInterfaceType t)
@@ -1007,6 +1011,7 @@ static void select_vgahw(const MachineClass *machine_class, const char *p)
                 exit(1);
             }
             vga_interface_type = t;
+            printf("%s vga is %s\n", __func__, ti->opt_name);
             break;
         }
     }
