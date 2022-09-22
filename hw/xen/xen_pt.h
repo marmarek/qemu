@@ -29,6 +29,15 @@ void xen_pt_log(const PCIDevice *d, const char *f, ...) G_GNUC_PRINTF(2, 3);
 #  define XEN_PT_LOG_CONFIG(d, addr, val, len)
 #endif
 
+/* addition to xen/interface/features.h until updated upstream */
+/*
+ * If set, Xen will passthrough all MSI-X vector ctrl writes to device model,
+ * not only those unmasking an entry. This allows device model to properly keep
+ * track of the MSI-X table without having to read it from the device behind
+ * Xen's backs. This information is relevant only for device models.
+ */
+#define XENFEAT_dm_msix_all_writes        18
+
 
 /* Helper */
 #define XEN_PFN(x) ((x) >> XC_PAGE_SHIFT)
