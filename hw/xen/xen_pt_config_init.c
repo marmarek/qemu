@@ -54,6 +54,14 @@ static int xen_pt_hide_dev_cap(const XenHostPCIDevice *d, uint8_t grp_id)
             return 1;
         }
         break;
+#ifdef CONFIG_STUBDOM
+    case PCI_CAP_ID_MSIX: {
+        xen_feature_info_t xc_version_info = { 0 };
+        if (xc_version(xen_xc, XENVER_get_features, &xc_version_info) < 0)
+            return 1;
+        return !(xc_version_info.submap & (1U << XENFEAT_dm_msix_all_writes));
+    }
+#endif
     }
     return 0;
 }
