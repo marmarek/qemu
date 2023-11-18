@@ -2184,6 +2184,7 @@ if xen.found()
     ('0' + xen_version[1]).substring(-2) + \
     ('0' + xen_version[2]).substring(-2)
   config_host_data.set('CONFIG_XEN_CTRL_INTERFACE_VERSION', xen_ctrl_version)
+  config_host_data.set('CONFIG_STUBDOM', get_option('stubdom').enabled())
 endif
 config_host_data.set('QEMU_VERSION', '"@0@"'.format(meson.project_version()))
 config_host_data.set('QEMU_VERSION_MAJOR', meson.project_version().split('.')[0])
@@ -4149,6 +4150,7 @@ if have_system
   if xen.found()
     summary_info += {'xen ctrl version':  xen.version()}
   endif
+  summary_info += {'Xen stubdomain':    config_host_data.get('CONFIG_STUBDOM', false)}
   summary_info += {'Xen emulation':     config_all.has_key('CONFIG_XEN_EMU')}
 endif
 summary_info += {'TCG support':       config_all.has_key('CONFIG_TCG')}

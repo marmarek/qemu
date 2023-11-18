@@ -168,6 +168,7 @@ meson_options_help() {
   printf "%s\n" '  spice           Spice server support'
   printf "%s\n" '  spice-protocol  Spice protocol support'
   printf "%s\n" '  stack-protector compiler-provided stack protection'
+  printf "%s\n" '  stubdom         Build for Xen stubdomain'
   printf "%s\n" '  tcg             TCG support'
   printf "%s\n" '  tools           build support utilities that come with QEMU'
   printf "%s\n" '  tpm             TPM support'
@@ -454,6 +455,8 @@ _meson_option_parse() {
     --disable-stack-protector) printf "%s" -Dstack_protector=disabled ;;
     --enable-strip) printf "%s" -Dstrip=true ;;
     --disable-strip) printf "%s" -Dstrip=false ;;
+    --enable-stubdom) printf "%s" -Dstubdom=enabled ;;
+    --disable-stubdom) printf "%s" -Dstubdom=disabled ;;
     --sysconfdir=*) quote_sh "-Dsysconfdir=$2" ;;
     --enable-tcg) printf "%s" -Dtcg=enabled ;;
     --disable-tcg) printf "%s" -Dtcg=disabled ;;
