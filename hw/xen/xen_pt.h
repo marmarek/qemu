@@ -15,6 +15,9 @@
 #include "xen-host-pci-device.h"
 #include "qom/object.h"
 
+#define XEN_PT_LOGGING_ENABLED 1
+#define XEN_PT_DEBUG_PCI_CONFIG_ACCESS 1
+
 void xen_pt_log(const PCIDevice *d, const char *f, ...) G_GNUC_PRINTF(2, 3);
 
 #define XEN_PT_ERR(d, _f, _a...) xen_pt_log(d, "%s: Error: "_f, __func__, ##_a)
